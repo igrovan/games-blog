@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Штаб мстящего суслика</title>
+    <link rel="stylesheet" href="/games-blog/styles/blog.css">
+
+    <link rel="icon" type="image/png" href="/games-blog/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/games-blog/favicon.svg" />
+    <link rel="shortcut icon" href="/games-blog/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/games-blog/apple-touch-icon.png" />
+    <link rel="manifest" href="/games-blog/site.webmanifest" />
+
+    <script src="/games-blog/scripts/blog.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href="/games-blog/index.html" class="site-title">Штаб мстящего суслика</a>
+<!--        <nav class="main-nav">-->
+<!--            <a href="/games-blog/index.html" class="nav-link">Главная</a>-->
+<!--        </nav>-->
+    </div>
+</header>
+
+    <!-- Hero section -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1>Добро пожаловать в мой блог!</h1>
+            <p>
+                Устраивайся поудобнее, заваривай кружечку чая, и будь готов к тому,
+                что под словом "Заметка" скрывается нечто большее (конечно-же в плане объёма)
+            </p>
+        </div>
+    </section>
+
+    <!-- Hero Image -->
+    <div class="hero-image-container">
+        <img src="/games-blog/media/hero.avif" alt="Hero" class="hero-image">
+    </div>
+
+    <!-- Articles list -->
+    <main class="articles-container">
+        <h2 class="section-title">Заметки</h2>
+        
+        <div class="articles-grid">
+
+            <article class="article-card">
+                <a href="clair-obscur/index.html" class="card-link">
+                    <div class="card-image" style="background-image: url('clair-obscur/media/cover.avif');">
+                        <span class="card-category">"Заметка"</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Clair Obscur: Expedition 33</h3>
+                        <p class="card-excerpt">Подробный разбор одной из лучших игр 2025 года. Геймплей, визуал, музыка и сюжет - всё разобрано по полочкам.</p>
+                        <div class="card-meta">
+                            <span class="card-date">04.07.2025</span>
+                            <span class="card-read">30 мин чтения</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </main>
+
+    <!-- Lightbox for image zoom -->
+    <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightboxImage" src="" alt="">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Штаб мстящего суслика</p>
+    </footer>
+</body>
+</html>
