@@ -95,14 +95,65 @@ document.addEventListener('DOMContentLoaded', function() {
 function openLightbox(imgSrc) {
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxLoader = document.getElementById('lightboxLoader');
+    
+    // Show lightbox immediately
     lightbox.style.display = 'block';
-    lightboxImg.src = imgSrc;
+    lightboxImg.style.display = 'none';
+    lightboxLoader.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    
+    // Generate full-size image URL
+    const fullSizeSrc = getFullSizeImageUrl(imgSrc);
+    
+    // Create new image to preload the full-size version
+    const fullImg = new Image();
+    fullImg.onload = function() {
+        lightboxImg.src = fullSizeSrc;
+        lightboxLoader.style.display = 'none';
+        lightboxImg.style.display = 'block';
+    };
+    fullImg.onerror = function() {
+        // If full-size image fails, fallback to original
+        lightboxImg.src = imgSrc;
+        lightboxLoader.style.display = 'none';
+        lightboxImg.style.display = 'block';
+    };
+    fullImg.src = fullSizeSrc;
+}
+
+function getFullSizeImageUrl(imgSrc) {
+    // Parse the URL to extract filename and extension
+    const url = new URL(imgSrc, window.location.href);
+    const pathname = url.pathname;
+    
+    // Find the last slash and dot to separate filename and extension
+    const lastSlashIndex = pathname.lastIndexOf('/');
+    const lastDotIndex = pathname.lastIndexOf('.');
+    
+    if (lastDotIndex > lastSlashIndex) {
+        // Has extension
+        const filename = pathname.substring(lastSlashIndex + 1, lastDotIndex);
+        const extension = pathname.substring(lastDotIndex);
+        const dir = pathname.substring(0, lastSlashIndex + 1);
+        
+        // Return path with _full suffix
+        return url.origin + dir + filename + '_full' + extension;
+    }
+    
+    // No extension, just append _full
+    return imgSrc + '_full';
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxLoader = document.getElementById('lightboxLoader');
+    
     lightbox.style.display = 'none';
+    lightboxImg.src = '';
+    lightboxImg.style.display = 'none';
+    lightboxLoader.style.display = 'flex';
     document.body.style.overflow = 'auto';
 }
 

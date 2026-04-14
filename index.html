@@ -37,7 +37,7 @@
 
     <!-- Hero Image -->
     <div class="hero-image-container">
-        <img src="/games-blog/media/hero.avif" alt="Hero" class="hero-image" loading="lazy">
+        <img src="/games-blog/media/hero.avif" alt="Hero" class="hero-image">
     </div>
 
     <!-- Articles list -->
@@ -83,7 +83,10 @@
     <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content">
             <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-loader" id="lightboxLoader">
+                <div class="spinner"></div>
+            </div>
+            <img id="lightboxImage" src="" alt="" style="display: none;">
         </div>
     </div>
 
