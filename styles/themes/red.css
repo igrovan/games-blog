@@ -1,0 +1,10 @@
+/* Red Theme - Red color scheme */
+:root {
+    --color-primary: #c62828;
+    --color-primary-dark: #8e0000;
+    --color-primary-light: rgba(198, 40, 40, 0.8);
+    --color-primary-bg: rgba(198, 40, 40, 0.1);
+    --color-primary-border: rgba(198, 40, 40, 0.3);
+    --hero-overlay-start: rgba(40, 10, 10, 0.4);
+    --hero-overlay-end: rgba(60, 20, 20, 0.4);
+}
