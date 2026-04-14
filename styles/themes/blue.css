@@ -1,0 +1,10 @@
+/* Blue Theme - Blue color scheme */
+:root {
+    --color-primary: #1976d2;
+    --color-primary-dark: #0d47a1;
+    --color-primary-light: rgba(25, 118, 210, 0.8);
+    --color-primary-bg: rgba(25, 118, 210, 0.1);
+    --color-primary-border: rgba(25, 118, 210, 0.3);
+    --hero-overlay-start: rgba(13, 71, 161, 0.6);
+    --hero-overlay-end: rgba(25, 118, 210, 0.6);
+}

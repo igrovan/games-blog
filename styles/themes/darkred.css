@@ -1,0 +1,10 @@
+/* Dark Red Theme - Deep red color scheme for Alan Wake 2 */
+:root {
+    --color-primary: #8b0000;
+    --color-primary-dark: #4a0000;
+    --color-primary-light: rgba(139, 0, 0, 0.8);
+    --color-primary-bg: rgba(139, 0, 0, 0.15);
+    --color-primary-border: rgba(139, 0, 0, 0.4);
+    --hero-overlay-start: rgba(40, 0, 0, 0.85);
+    --hero-overlay-end: rgba(139, 0, 0, 0.75);
+}

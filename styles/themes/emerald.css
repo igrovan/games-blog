@@ -1,0 +1,10 @@
+/* Emerald Theme - Green color scheme */
+:root {
+    --color-primary: #2d7a5e;
+    --color-primary-dark: #1a3d2e;
+    --color-primary-light: rgba(45, 122, 94, 0.8);
+    --color-primary-bg: rgba(45, 122, 94, 0.1);
+    --color-primary-border: rgba(45, 122, 94, 0.3);
+    --hero-overlay-start: rgba(26, 61, 46, 0.6);
+    --hero-overlay-end: rgba(45, 122, 94, 0.6);
+}

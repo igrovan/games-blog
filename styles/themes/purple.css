@@ -1,0 +1,10 @@
+/* Purple Theme - Purple color scheme */
+:root {
+    --color-primary: #7b1fa2;
+    --color-primary-dark: #4a148c;
+    --color-primary-light: rgba(123, 31, 162, 0.8);
+    --color-primary-bg: rgba(123, 31, 162, 0.1);
+    --color-primary-border: rgba(123, 31, 162, 0.3);
+    --hero-overlay-start: rgba(74, 20, 140, 0.6);
+    --hero-overlay-end: rgba(123, 31, 162, 0.6);
+}

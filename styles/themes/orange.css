@@ -1,0 +1,10 @@
+/* Orange Theme - Orange color scheme */
+:root {
+    --color-primary: #e65100;
+    --color-primary-dark: #bf360c;
+    --color-primary-light: rgba(230, 81, 0, 0.8);
+    --color-primary-bg: rgba(230, 81, 0, 0.1);
+    --color-primary-border: rgba(230, 81, 0, 0.3);
+    --hero-overlay-start: rgba(191, 54, 12, 0.6);
+    --hero-overlay-end: rgba(230, 81, 0, 0.6);
+}
