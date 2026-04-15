@@ -148,6 +148,26 @@ function updateLightboxTransform(img) {
 
 function setupLightboxTouchEvents(lightboxImg) {
     const lightbox = document.getElementById('imageLightbox');
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
+    
+    // Stop propagation on content area to prevent closing when interacting with image
+    if (lightboxContent) {
+        lightboxContent.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+        
+        lightboxContent.addEventListener('touchend', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+        
+        lightboxContent.addEventListener('touchmove', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+        
+        lightboxContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
     
     // Double tap to zoom
     let lastTap = 0;
@@ -167,6 +187,7 @@ function setupLightboxTouchEvents(lightboxImg) {
             }
             updateLightboxTransform(lightboxImg);
             e.preventDefault();
+            e.stopPropagation();
         }
         lastTap = currentTime;
     });
@@ -178,6 +199,8 @@ function setupLightboxTouchEvents(lightboxImg) {
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
             lastTouchDistance = Math.sqrt(dx * dx + dy * dy);
+            e.preventDefault();
+            e.stopPropagation();
         }
     }, { passive: false });
 
@@ -194,9 +217,11 @@ function setupLightboxTouchEvents(lightboxImg) {
                 updateLightboxTransform(lightboxImg);
             }
             lastTouchDistance = distance;
+            e.stopPropagation();
         } else if (lightboxScale > 1 && e.touches.length === 1) {
             // Pan when zoomed
             e.preventDefault();
+            e.stopPropagation();
         }
     }, { passive: false });
 
@@ -204,6 +229,10 @@ function setupLightboxTouchEvents(lightboxImg) {
         if (e.touches.length < 2) {
             isPinching = false;
             lastTouchDistance = 0;
+        }
+        // Stop propagation to prevent triggering click/close
+        if (lightboxScale > 1) {
+            e.stopPropagation();
         }
     });
 }

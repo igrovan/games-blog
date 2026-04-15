@@ -80,12 +80,16 @@
     </main>
 
     <!-- Lightbox for image zoom -->
-    <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+    <div id="imageLightbox" class="lightbox">
+        <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
         <div class="lightbox-content">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-close" onclick="closeLightbox()">×</span>
             <div class="lightbox-loader" id="lightboxLoader">
                 <div class="spinner"></div>
             </div>
+            <img id="lightboxImage" src="" alt="" style="display: none;">
+        </div>
+    </div>
             <img id="lightboxImage" src="" alt="" style="display: none;">
         </div>
     </div>

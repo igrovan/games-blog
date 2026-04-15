@@ -555,12 +555,16 @@
             <iframe src="https://forms.yandex.ru/u/697249e184227cbdd2fb589d?iframe=1&utm_source=alan_wake_2" frameborder="0" name="ya-form-697249e184227cbdd2fb589d" width="650"></iframe>
         </div>
     <!-- Lightbox for image zoom -->
-    <div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+    <div id="imageLightbox" class="lightbox">
+        <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
         <div class="lightbox-content">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-close" onclick="closeLightbox()">×</span>
             <div class="lightbox-loader" id="lightboxLoader">
                 <div class="spinner"></div>
             </div>
+            <img id="lightboxImage" src="" alt="" style="display: none;">
+        </div>
+    </div>
             <img id="lightboxImage" src="" alt="" style="display: none;">
         </div>
     </div>
