@@ -96,12 +96,18 @@ function openLightbox(imgSrc) {
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImage');
     const lightboxLoader = document.getElementById('lightboxLoader');
+    const viewportMeta = document.getElementById('viewport-meta');
 
     // Show lightbox immediately
     lightbox.style.display = 'block';
     lightboxImg.style.display = 'none';
     lightboxLoader.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+
+    // Enable zoom on mobile when lightbox is open
+    if (viewportMeta) {
+        viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
+    }
 
     // On mobile/small screens (less than 1080px), use original image
     // On larger screens, use full-size image
@@ -151,12 +157,18 @@ function closeLightbox() {
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImage');
     const lightboxLoader = document.getElementById('lightboxLoader');
+    const viewportMeta = document.getElementById('viewport-meta');
     
     lightbox.style.display = 'none';
     lightboxImg.src = '';
     lightboxImg.style.display = 'none';
     lightboxLoader.style.display = 'flex';
     document.body.style.overflow = 'auto';
+
+    // Disable zoom when lightbox is closed
+    if (viewportMeta) {
+        viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    }
 }
 
 // Initialize blog functionality
