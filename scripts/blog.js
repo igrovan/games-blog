@@ -97,7 +97,7 @@ let lightboxTranslateX = 0;
 let lightboxTranslateY = 0;
 let lastTouchDistance = 0;
 let isPinching = false;
-let hadMultiTouch = false;
+let lastMultiTouchTime = 0;
 
 // Blog functionality - Lightbox and interactions
 function openLightbox(imgSrc) {
@@ -156,8 +156,13 @@ function setupLightboxTouchEvents(lightboxImg) {
         const currentTime = new Date().getTime();
         const tapLength = currentTime - lastTap;
         
-        // Only process double-tap if we didn't have multi-touch
-        if (!hadMultiTouch && tapLength < 300 && tapLength > 0) {
+        // Block double-tap if multi-touch happened in last 500ms
+        if ((currentTime - lastMultiTouchTime) < 500) {
+            lastTap = currentTime;
+            return;
+        }
+        
+        if (tapLength < 300 && tapLength > 0) {
             // Double tap
             if (lightboxScale > 1) {
                 // Reset zoom
@@ -172,18 +177,13 @@ function setupLightboxTouchEvents(lightboxImg) {
             e.preventDefault();
         }
         
-        // Reset multi-touch flag when all fingers are up
-        if (e.touches.length === 0) {
-            hadMultiTouch = false;
-        }
-        
         lastTap = currentTime;
     });
 
     // Track any multi-touch gesture
     lightbox.addEventListener('touchstart', function(e) {
         if (e.touches.length >= 2) {
-            hadMultiTouch = true;
+            lastMultiTouchTime = new Date().getTime();
             isPinching = true;
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
