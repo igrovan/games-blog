@@ -97,7 +97,7 @@ let lightboxTranslateX = 0;
 let lightboxTranslateY = 0;
 let lastTouchDistance = 0;
 let isPinching = false;
-let pinchStartScale = 1;
+let didPinch = false;
 
 // Blog functionality - Lightbox and interactions
 function openLightbox(imgSrc) {
@@ -153,6 +153,11 @@ function setupLightboxTouchEvents(lightboxImg) {
     // Double tap to zoom
     let lastTap = 0;
     lightbox.addEventListener('touchend', function(e) {
+        // Skip if we just did a pinch gesture
+        if (didPinch) {
+            didPinch = false;
+            return;
+        }
         const currentTime = new Date().getTime();
         const tapLength = currentTime - lastTap;
         if (tapLength < 300 && tapLength > 0) {
@@ -176,7 +181,7 @@ function setupLightboxTouchEvents(lightboxImg) {
     lightbox.addEventListener('touchstart', function(e) {
         if (e.touches.length === 2) {
             isPinching = true;
-            pinchStartScale = lightboxScale; // Save current scale at start of pinch
+            didPinch = false; // Reset flag at start
             const dx = e.touches[0].clientX - e.touches[1].clientX;
             const dy = e.touches[0].clientY - e.touches[1].clientY;
             lastTouchDistance = Math.sqrt(dx * dx + dy * dy);
@@ -192,10 +197,13 @@ function setupLightboxTouchEvents(lightboxImg) {
             
             if (lastTouchDistance > 0) {
                 const scaleChange = distance / lastTouchDistance;
-                // Calculate new scale based on the scale at start of pinch
-                lightboxScale = Math.max(1, Math.min(5, pinchStartScale * scaleChange));
+                if (Math.abs(scaleChange - 1) > 0.01) {
+                    didPinch = true; // Mark that we actually zoomed
+                }
+                lightboxScale = Math.max(1, Math.min(5, lightboxScale * scaleChange));
                 updateLightboxTransform(lightboxImg);
             }
+            lastTouchDistance = distance;
         } else if (lightboxScale > 1 && e.touches.length === 1) {
             // Pan when zoomed
             e.preventDefault();
@@ -206,6 +214,10 @@ function setupLightboxTouchEvents(lightboxImg) {
         if (e.touches.length < 2) {
             isPinching = false;
             lastTouchDistance = 0;
+            // Clear didPinch after a short delay to allow double-tap again
+            if (didPinch) {
+                setTimeout(() => { didPinch = false; }, 400);
+            }
         }
     });
 }
