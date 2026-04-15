@@ -96,30 +96,32 @@ function openLightbox(imgSrc) {
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImage');
     const lightboxLoader = document.getElementById('lightboxLoader');
-    
+
     // Show lightbox immediately
     lightbox.style.display = 'block';
     lightboxImg.style.display = 'none';
     lightboxLoader.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    
-    // Generate full-size image URL
-    const fullSizeSrc = getFullSizeImageUrl(imgSrc);
-    
-    // Create new image to preload the full-size version
-    const fullImg = new Image();
-    fullImg.onload = function() {
-        lightboxImg.src = fullSizeSrc;
+
+    // On mobile/small screens (less than 1080px), use original image
+    // On larger screens, use full-size image
+    const isMobile = window.innerWidth < 1080;
+    const targetSrc = isMobile ? imgSrc : getFullSizeImageUrl(imgSrc);
+
+    // Create new image to preload
+    const img = new Image();
+    img.onload = function() {
+        lightboxImg.src = targetSrc;
         lightboxLoader.style.display = 'none';
         lightboxImg.style.display = 'block';
     };
-    fullImg.onerror = function() {
-        // If full-size image fails, fallback to original
+    img.onerror = function() {
+        // If target image fails, fallback to original
         lightboxImg.src = imgSrc;
         lightboxLoader.style.display = 'none';
         lightboxImg.style.display = 'block';
     };
-    fullImg.src = fullSizeSrc;
+    img.src = targetSrc;
 }
 
 function getFullSizeImageUrl(imgSrc) {
